@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aluno;
+use App\Models\CategoriaAluno;
 
 class AlunoController extends Controller
 {
@@ -16,7 +17,8 @@ class AlunoController extends Controller
 
     function create()
     {
-        return view('aluno.form');
+        $categorias = CategoriaAluno::orderBy('nome')->get();
+        return view('aluno.form', compact('categorias'));
     }
 
 
@@ -25,9 +27,11 @@ class AlunoController extends Controller
         $request->validate([
             'nome' => 'required',
             'cpf' => 'required',
+            'categoria_id' => 'required',
         ], [
             'nome.required' => "O :attribute é obrigatório",
-            'cpf.required' => "O :attribute é obrigatório"
+            'cpf.required' => "O :attribute é obrigatório",
+            'categoria_id.required' => "O :attribute é obrigatório",
         ]);
     }
     function store(Request $request)
@@ -41,7 +45,8 @@ class AlunoController extends Controller
     function edit($id)
     {
         $data = Aluno::find($id);
-        return view('aluno.form', compact('data')); //compact passa a referencia da memoria daqui para a view
+        $categorias = CategoriaAluno::orderBy('nome')->get();
+        return view('aluno.form', compact('data'), compact('categorias')); //compact passa a referencia da memoria daqui para a view
     }
 
     function update(Request $request, $id)

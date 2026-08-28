@@ -11,7 +11,16 @@ class Aluno extends Model
     
     protected $fillable = [
         'nome',
+        'telefone',
         'cpf',
-        'telefone'
+        'categoria_id',
     ];
+
+    //relacionamento de 1:1
+    protected $cast = ['categoria_id' => 'integer']; //para converter (o campo vai ser um campo inteiro)
+
+    public function categoria()
+    {
+        return $this->belongsTo(CategoriaAluno::class, 'categoria_id');
+    }
 }

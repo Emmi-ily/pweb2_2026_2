@@ -13,6 +13,7 @@
                     <option value="nome">Nome</option>
                     <option value="telefone">Telefone</option>
                     <option value="cpf">cpf</option>
+                    <option value="categoria_id">categoria</option>
                 </select>
             </div>
             <div class="col-5">
@@ -46,8 +47,9 @@
             <tr>
                 <th scope='row'>{{ $item->id }}</th>
                 <td>{{ $item->nome }}</td>
-                <td>{{ $item->cpf }}</td>
                 <td>{{ $item->telefone }}</td>
+                <td>{{ $item->cpf }}</td>
+                <td>{{ $item->categoria->nome }}</td>
                 <td>
                     <a class='btn btn-warning' title='Editar' href="{{ route('aluno.edit', $item->id) }}">Editar</a>
                 </td>

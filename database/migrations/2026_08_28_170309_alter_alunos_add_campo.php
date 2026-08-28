@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categoria_alunos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome', 80);
-            $table->string('nivel', 40)->nullable();
-            $table->timestamps();
+        schema::disableForeignKeyConstraints();
+        Schema::table('alunos', function (Blueprint $table) {
+            $table->string('imagem', 150)->nullable();
+            $table->foreignId('categoria_id')->constrained('categoria_alunos');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categoria_alunos');
+        //
     }
-    
 };

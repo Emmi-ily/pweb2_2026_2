@@ -30,6 +30,21 @@
                 <label for="telefone">Telefone</label>
                 <input type="text" name="telefone" class="form-control" value="{{ old('telefone', $data->telefone ?? '') }}">
             </div>
+            <div class="col-6">
+                <label for="categoria_id">Categoria</label>
+                <select name="categoria_id" class="form-select">
+                    @foreach ($categorias as $item)
+                        <option value="{{ $item->id }}"
+                            {{ old('categoria_id', $data->categoria_id ?? '') == $item->id ? 'selected' : }}>
+                            {{ $item->nome }}
+
+
+
+
+                </select>
+
+
+            </div>
             <div class="mt-2">
                 <button type="submit" class="btn btn-success">Salvar</button>
                 <a href="{{ url('aluno/voltar') }}" class="btn btn-success">Voltar</a>
